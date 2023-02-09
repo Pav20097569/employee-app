@@ -1,19 +1,24 @@
 package ie.setu
 
-
+import mu.KotlinLogging
 
 import kotlin.math.round
 
 
 var employees = EmployeeAPI()
 
+val logger = KotlinLogging.logger {}
 
 fun main(args: Array<String>){
-  1
+    logger.info { "Launching Employee App" }
+
+
+
     start()
 }
 
 fun menu() : Int {
+    logger.info { "Printing Menu" }
     print(""" 
          |Employee Menu
          |   1. Add Employee
@@ -45,6 +50,7 @@ fun start() {
 }
 
 fun add(){
+    logger.info { "Enter Employee Details" }
     print("Enter first name: ")
     val firstName = readLine().toString()
     print("Enter surname: ")
