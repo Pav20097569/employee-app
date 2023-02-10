@@ -26,6 +26,8 @@ fun menu() : Int { // function to display the menu to the user
          |   3. Search Employees 
          |   4. Print Payslip for Employee
          |   5. Remove Employee
+         |   6. Update Employee Details
+         |   7. Calculate Net Salary
          |  -1. Exit
          |       
          |Enter Option : """.trimMargin()) // display the menu to the user
@@ -43,6 +45,7 @@ fun start() {
             3 -> search()
             4 -> paySlip()
             5 -> removeEmployee()
+            6 -> updateEmployeeDetails()
             -99 -> dummyData()
             -1 -> println("Exiting App")
             else -> println("Invalid Option")  // if the selected option is invalid, display an error message
@@ -50,6 +53,8 @@ fun start() {
         println() // print a blank line for readability
     } while (input != -1)  // continue to loop until the user selects -1 to exit the app
 }
+
+
 
 fun add(){
     logger.info { "Enter Employee Details" } // log that the user is entering employee details
@@ -100,6 +105,48 @@ fun paySlip(){
     if (employee != null)
         println(employee.getPayslip())
 }
+
+fun updateEmployeeDetails() {
+    val employee = getEmployeeById() //get employee id
+    if (employee != null) { //check if employee with this id exists
+        print("Enter new first name: ")
+        val firstName = readLine().toString()
+        print("Enter new surname: ")
+        val surname = readLine().toString()
+        print("Enter new gender (m/f): ")
+        val gender = readLine()!!.toCharArray()[0]
+        print("Enter new gross salary: ")
+        val grossSalary = readLine()!!.toDouble()
+        print("Enter new PAYE %: ")
+        val payePercentage = readLine()!!.toDouble()
+        print("Enter new PRSI %: ")
+        val prsiPercentage = readLine()!!.toDouble()
+        print("Enter new Annual Bonus: ")
+        val annualBonus= readLine()!!.toDouble()
+        print("Enter new Cycle to Work Deduction: ")
+        val cycleToWorkMonthlyDeduction= readLine()!!.toDouble()
+
+
+        //updates the employee details
+        employee.firstName = firstName
+        employee.surname = surname
+        employee.gender = gender
+        employee.grossSalary = grossSalary
+        employee.payePercentage = payePercentage
+        employee.prsiPercentage = prsiPercentage
+        employee.annualBonus = annualBonus
+        employee.cycleToWorkMonthlyDeduction = cycleToWorkMonthlyDeduction
+
+        employees.update(employee)
+        println("Employee with id ${employee.employeeID} was successfully updated")
+    } else {
+        println("No employee found")
+    }
+}
+
+
+
+
 
 internal fun getEmployeeById(): Employee? {
     print("Enter the employee id to search by: ")
