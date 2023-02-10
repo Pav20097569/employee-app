@@ -5,53 +5,55 @@ import mu.KotlinLogging
 import kotlin.math.round
 
 
-var employees = EmployeeAPI()
+var employees = EmployeeAPI() // instantiate an instance of the EmployeeAPI class
 
-val logger = KotlinLogging.logger {}
+val logger = KotlinLogging.logger {}  // logger to log the progress of the app
 
 fun main(args: Array<String>){
-    logger.info { "Launching Employee App" }
+    logger.info { "Launching Employee App" } // log that the employee app is launching
 
 
 
-    start()
+    start() // call the start function to run the app
 }
 
-fun menu() : Int {
-    logger.info { "Printing Menu" }
+fun menu() : Int { // function to display the menu to the user
+    logger.info { "Printing Menu" }  // log that the menu is being displayed
     print(""" 
          |Employee Menu
          |   1. Add Employee
          |   2. List All Employees
          |   3. Search Employees 
          |   4. Print Payslip for Employee
+         |   5. Remove Employee
          |  -1. Exit
          |       
-         |Enter Option : """.trimMargin())
-    return readLine()!!.toInt()
+         |Enter Option : """.trimMargin()) // display the menu to the user
+    return readLine()!!.toInt() // return the option selected by the user as an integer
 }
 
 fun start() {
-    var input: Int
+    var input: Int // variable to store the user's selected option
 
     do {
-        input = menu()
-        when (input) {
-            1 -> add()
-            2 -> list()
+        input = menu() // call the menu function and store the selected option in the input variable
+        when (input) { // evaluate the selected option
+            1 -> add() // if the selected option is 1, call the add function
+            2 -> list() // if the selected option is 2, call the list function
             3 -> search()
             4 -> paySlip()
+            5 -> removeEmployee()
             -99 -> dummyData()
             -1 -> println("Exiting App")
-            else -> println("Invalid Option")
+            else -> println("Invalid Option")  // if the selected option is invalid, display an error message
         }
-        println()
-    } while (input != -1)
+        println() // print a blank line for readability
+    } while (input != -1)  // continue to loop until the user selects -1 to exit the app
 }
 
 fun add(){
-    logger.info { "Enter Employee Details" }
-    print("Enter first name: ")
+    logger.info { "Enter Employee Details" } // log that the user is entering employee details
+    print("Enter first name: ")  // prompt the user to enter the first name of the employee
     val firstName = readLine().toString()
     print("Enter surname: ")
     val surname = readLine().toString()
@@ -68,20 +70,29 @@ fun add(){
     print("Enter Cycle to Work Deduction: ")
     val cycleToWorkMonthlyDeduction= readLine()!!.toDouble()
 
-    employees.create(Employee(firstName, surname, gender, 0, grossSalary, payePercentage, prsiPercentage, annualBonus, cycleToWorkMonthlyDeduction))
+    employees.create(Employee(firstName, surname, gender, 0, grossSalary, payePercentage, prsiPercentage, annualBonus, cycleToWorkMonthlyDeduction)) //creates new instance of employee
 }
 
-fun list(){
+fun list(){  //function used to list all the employees
     employees.findAll()
         .forEach{ println(it) }
 }
 
-fun search() {
-    val employee = getEmployeeById()
+fun search() { //search for employees using employeeId
+    val employee = getEmployeeById()  // getEmployeeById is called to retrieve the employee with the matching ID
     if (employee == null)
         println("No employee found")
     else
         println(employee)
+}
+fun removeEmployee() {  //removes employee from list using ID
+    val employee = getEmployeeById()  // getEmployeeById is called to retrieve the employee with the matching ID
+    if (employee != null) {
+        employees.remove(employee.employeeID)
+        println("Employee with id ${employee.employeeID} was successfully removed")  // If an employee with the matching ID is found, it is removed from the employee list and a message is printed indicating the removal was successful
+    } else {
+        println("No employee found")  // If an employee with the matching ID is not found, a message indicating this is printed
+    }
 }
 
 fun paySlip(){
