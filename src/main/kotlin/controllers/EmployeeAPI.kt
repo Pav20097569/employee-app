@@ -1,4 +1,6 @@
-package ie.setu
+package ie.setu.controllers
+
+import ie.setu.models.Employee
 
 var lastId = 0
 
@@ -23,7 +25,8 @@ class EmployeeAPI {
         employees.add(employee)
     }
     fun remove(id: Int) {
-        employees.removeIf { it.employeeID == id }
+        employees.removeIf { it.employeeID == id } //removes employee if id matches the id input by the user
+
     }
     fun update(employee: Employee) {
         for (i in employees.indices) {  // loop through the list of employees
@@ -34,3 +37,5 @@ class EmployeeAPI {
         }
     }
 }
+
+

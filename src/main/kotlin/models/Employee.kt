@@ -1,6 +1,4 @@
-package ie.setu
-import ie.setu.roundTwoDecimals
-
+package ie.setu.models
 
 
 class Employee(var firstName: String, var surname: String, var gender: Char, var employeeID: Int,

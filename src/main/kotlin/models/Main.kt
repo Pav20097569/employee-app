@@ -1,8 +1,10 @@
-package ie.setu
+package ie.setu.models
 
+import ie.setu.controllers.EmployeeAPI
 import mu.KotlinLogging
 
 import kotlin.math.round
+
 
 
 var employees = EmployeeAPI() // instantiate an instance of the EmployeeAPI class
@@ -20,14 +22,14 @@ fun main(args: Array<String>){
 fun menu() : Int { // function to display the menu to the user
     logger.info { "Printing Menu" }  // log that the menu is being displayed
     print(""" 
-         |Employee Menu
+         |         -----Employee Menu-----
          |   1. Add Employee
          |   2. List All Employees
          |   3. Search Employees 
          |   4. Print Payslip for Employee
          |   5. Remove Employee
          |   6. Update Employee Details
-         |   7. Calculate Net Salary
+         |   7. Sort Employees By Gender
          |  -1. Exit
          |       
          |Enter Option : """.trimMargin()) // display the menu to the user
@@ -46,6 +48,7 @@ fun start() {
             4 -> paySlip()
             5 -> removeEmployee()
             6 -> updateEmployeeDetails()
+            7 -> sortByGender()
             -99 -> dummyData()
             -1 -> println("Exiting App")
             else -> println("Invalid Option")  // if the selected option is invalid, display an error message
@@ -142,6 +145,12 @@ fun updateEmployeeDetails() {
     } else {
         println("No employee found")
     }
+}
+
+
+fun sortByGender() { // This function sorts a list of employees by their gender
+    val sortedEmployees = employees.findAll().sortedBy { it.gender }     // The list is sorted by gender using the "sortedBy" function
+    sortedEmployees.forEach { println(it) } // For each employee in the sorted list, print out the employee information
 }
 
 
