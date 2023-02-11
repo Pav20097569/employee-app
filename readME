@@ -1,0 +1,11 @@
+Employee Management System
+This is a console-based employee management system implemented in Kotlin that allows you to add, list, search, remove, and update employee information as well as generate payslips for employees.
+
+Features
+Add a new employee by entering their first name, surname, gender, gross salary, PAYE percentage, PRSI percentage, annual bonus, and cycle to work monthly deduction.
+List all employees and display their information.
+Search for an employee by entering their employee ID.
+Remove an employee by entering their employee ID.
+Update an employee's details by entering their employee ID and updating their first name, surname, gender, gross salary, PAYE percentage, PRSI percentage, annual bonus, and cycle to work monthly deduction.
+Generate a payslip for an employee by entering their employee ID.
+Logging
